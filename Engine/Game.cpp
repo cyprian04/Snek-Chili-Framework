@@ -24,7 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	brd(gfx),
+	rng(std::random_device()()) // krótszy zapis aby nie robiæ deklaracji w Game.h //
 {
 }
 
@@ -42,4 +44,14 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	std::uniform_int_distribution<int> colorDist(0, 255);
+	for (int y = 0; y < brd.GetHeight(); y++)
+	{
+		for (int x = 0; x < brd.GetWidth(); x++)
+		{
+			Location loc = {x,y};
+			Color c(colorDist(rng), colorDist(rng), colorDist(rng));
+			brd.DrawCell(loc, c);
+		}
+	}
 }
