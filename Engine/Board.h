@@ -7,7 +7,7 @@ class Board
 {
 public:
 	Board(Graphics& gfx); // konstruktor przypisuje wartoœci referencji z Graphics do nowo utworzonego elemetu gfx przez liste inicjalizacyjn¹ //
-	void DrawCell(Location& loc_in, Color c);
+	void DrawCell(const Location& in_loc, Color c);
 	int GetWidth() const ;
 	int GetHeight() const;
 

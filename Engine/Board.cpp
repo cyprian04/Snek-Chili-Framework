@@ -9,14 +9,14 @@ Board::Board(Graphics& gfx)
 {
 }
 
-void Board::DrawCell(Location& loc_in, Color c)
+void Board::DrawCell(const Location& in_loc, Color c)
 {
-	assert(loc_in.x >= 0);
-	assert(loc_in.y >= 0);
-	assert(loc_in.x < width);
-	assert(loc_in.y < height);
+	assert(in_loc.x >= 0);
+	assert(in_loc.y >= 0);
+	assert(in_loc.x < width);
+	assert(in_loc.y < height);
 
-	gfx.DrawRectDim(loc_in.x * dimension, loc_in.y * dimension, dimension, dimension, c);
+	gfx.DrawRectDim(in_loc.x * dimension, in_loc.y * dimension, dimension, dimension, c);
 }
 
 int Board::GetWidth() const
