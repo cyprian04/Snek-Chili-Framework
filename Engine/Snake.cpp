@@ -32,6 +32,18 @@ void Snake::Draw(Board& in_brd) const
 	}
 }
 
+bool Snake::IsInTile(const Location& target) const
+{
+	for (int i = 0; i < nSegments; i++) 
+	{
+		if (segments[i].GetLocation() == target) // mo¿emy je przyrównaæ(wartoœci wspó³rzêdnych dwóch obiektów) przez to ¿e zrobiliœmy prze³adowanie operatora == //
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 bool Snake::IsInTileExceptEnd(const Location& target) const
 {
 	for (int i = 0; i < nSegments -1 ; i++) // odejmujemy 1 od nSegments aby nie liczy³o ogona(ostatniego bloku) w momencie wejœcia g³owy na jego stare miejsce, poniewa¿ ogon i tak przejdzie w inn¹ pozycjê // 

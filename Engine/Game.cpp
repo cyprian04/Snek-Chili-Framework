@@ -27,7 +27,8 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	brd(gfx),
 	snek({2,2}),
-	rng(std::random_device()()) // krótszy zapis aby nie robiæ deklaracji w Game.h //
+	rng(std::random_device()()), // krótszy zapis aby nie robiæ deklaracji w Game.h //
+	goal(rng, brd, snek)
 {
 }
 
@@ -72,11 +73,17 @@ void Game::UpdateModel()
 			}
 			else
 			{
-				if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+				const bool eating = next == goal.GetLocation();
+				if (eating)
 				{
 					snek.Grow();
+					goal.Respawn(rng, brd, snek);
 				}
 				snek.MoveBy(delta_loc);
+				if (eating)
+				{
+					goal.Respawn(rng, brd, snek);
+				}
 			}
 		}
 	}
@@ -85,6 +92,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	snek.Draw(brd);
+	goal.Draw(brd);
 	if (gameIsOver)
 	{
 		SpriteCodex::DrawGameOver(350, 250, gfx);

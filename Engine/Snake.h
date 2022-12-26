@@ -25,6 +25,7 @@ public:
 	Location GetNextHeadLocation(const Location& delta_loc) const;	 	
 	void Grow();								// okej czaje, odpowiada za zwiêkszenie siê iloœci segmentów //
 	void Draw(Board& in_brd) const;				// okej czaje, odpowiada za rysowanie ca³ego Snake'a //
+	bool IsInTile(const Location& target) const;
 	bool IsInTileExceptEnd(const Location& target) const;
 
 private:
