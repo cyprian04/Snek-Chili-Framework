@@ -26,6 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	brd(gfx),
+	snek({2,2}),
 	rng(std::random_device()()) // krótszy zapis aby nie robiæ deklaracji w Game.h //
 {
 }
@@ -40,18 +41,52 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (!gameIsOver)
+	{
+		if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		{
+			delta_loc = {-1,0};
+		}
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		{
+			delta_loc = { 1,0 };
+		}
+		if (wnd.kbd.KeyIsPressed(VK_UP))
+		{
+			delta_loc = { 0,-1 };
+		}
+		if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		{
+			delta_loc = { 0,1 };
+		}
+
+		++snekMoveCounter;
+		if (snekMoveCounter >= snekMovePeriod)
+		{
+			snekMoveCounter = 0;
+
+			Location next = snek.GetNextHeadLocation(delta_loc);
+			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next))
+			{
+				gameIsOver = true;
+			}
+			else
+			{
+				if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+				{
+					snek.Grow();
+				}
+				snek.MoveBy(delta_loc);
+			}
+		}
+	}
 }
 
 void Game::ComposeFrame()
 {
-	std::uniform_int_distribution<int> colorDist(0, 255);
-	for (int y = 0; y < brd.GetHeight(); y++)
+	snek.Draw(brd);
+	if (gameIsOver)
 	{
-		for (int x = 0; x < brd.GetWidth(); x++)
-		{
-			Location loc = {x,y};
-			Color c(colorDist(rng), colorDist(rng), colorDist(rng));
-			brd.DrawCell(loc, c);
-		}
+		SpriteCodex::DrawGameOver(350, 250, gfx);
 	}
 }

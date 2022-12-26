@@ -8,7 +8,7 @@ Snake::Snake(const Location& in_loc)
 
 void Snake::MoveBy(const Location& delta_loc)
 {
-	for (int i = nSegments- 1; i > 0; i--)
+	for (int i = nSegments- 1; i > 0; --i)
 	{
 		segments[i].Follow(segments[i - 1]);
 	}
@@ -19,6 +19,7 @@ void Snake::Grow()
 {
 	if (nSegments < nSegmentsMax)
 	{
+		segments[nSegments].InitBody();
 		++nSegments;
 	}
 }
@@ -29,6 +30,25 @@ void Snake::Draw(Board& in_brd) const
 	{
 		segments[i].Draw(in_brd);
 	}
+}
+
+bool Snake::IsInTileExceptEnd(const Location& target) const
+{
+	for (int i = 0; i < nSegments -1 ; i++) // odejmujemy 1 od nSegments aby nie liczy³o ogona(ostatniego bloku) w momencie wejœcia g³owy na jego stare miejsce, poniewa¿ ogon i tak przejdzie w inn¹ pozycjê // 
+	{
+		if (segments[i].GetLocation() == target) // mo¿emy je przyrównaæ(wartoœci wspó³rzêdnych dwóch obiektów) przez to ¿e zrobiliœmy prze³adowanie operatora == //
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+Location Snake::GetNextHeadLocation(const Location& delta_loc) const
+{
+	Location l(segments[0].GetLocation());
+	l.Add(delta_loc);
+	return l;
 }
 
 void Snake::Segment::InitHead(const Location& in_loc)
@@ -56,4 +76,9 @@ void Snake::Segment::MoveBy(const Location& delta_loc)
 void Snake::Segment::Draw(Board& in_brd) const
 {
 	in_brd.DrawCell(loc, c);
+}
+
+const Location& Snake::Segment::GetLocation() const
+{
+	return loc;
 }

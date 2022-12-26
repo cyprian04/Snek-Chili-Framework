@@ -19,6 +19,12 @@ void Board::DrawCell(const Location& in_loc, Color c)
 	gfx.DrawRectDim(in_loc.x * dimension, in_loc.y * dimension, dimension, dimension, c);
 }
 
+bool Board::IsInsideBoard(const Location& in_loc) const
+{
+	return in_loc.x >= 0 && in_loc.x < width &&
+		   in_loc.y >= 0 && in_loc.y < height;
+}
+
 int Board::GetWidth() const
 {
 	return width;
