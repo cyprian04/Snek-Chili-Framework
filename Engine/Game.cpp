@@ -42,8 +42,12 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_RETURN))
+	{
+		isStarted = true;
+	}
 
-	if (!gameIsOver)
+	if (!gameIsOver && isStarted)
 	{
 		if (wnd.kbd.KeyIsPressed(VK_LEFT))
 		{
@@ -88,14 +92,25 @@ void Game::UpdateModel()
 			}
 		}
 	}
+	
 }
 
 void Game::ComposeFrame()
 {
-	snek.Draw(brd);
-	goal.Draw(brd);
-	if (gameIsOver)
+	if (!isStarted)
+	{	
+		SpriteCodex::DrawTitle(300, 200, gfx);
+	}
+	if (isStarted)
 	{
+		brd.DrawBoard(Colors::Blue);
+		snek.Draw(brd);
+		goal.Draw(brd);
+	}
+	if (gameIsOver) 
+	{
+		
 		SpriteCodex::DrawGameOver(350, 250, gfx);
 	}
+	
 }
