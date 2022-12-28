@@ -42,6 +42,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
 	if (!gameIsOver)
 	{
 		if (wnd.kbd.KeyIsPressed(VK_LEFT))

@@ -28,6 +28,7 @@
 #include "Snake.h"
 #include "SpriteCodex.h"
 #include "Goal.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -52,6 +53,7 @@ private:
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
 	Goal goal;
+	FrameTimer ft;
 	static constexpr int snekMovePeriod = 40;
 	int snekMoveCounter = 0;
 	bool gameIsOver = false;
