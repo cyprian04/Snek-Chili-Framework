@@ -82,7 +82,6 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					snek.Grow();
-					goal.Respawn(rng, brd, snek);
 				}
 				snek.MoveBy(delta_loc);
 				if (eating)
@@ -103,9 +102,9 @@ void Game::ComposeFrame()
 	}
 	if (isStarted)
 	{
-		brd.DrawBoard(Colors::Blue);
 		snek.Draw(brd);
 		goal.Draw(brd);
+		brd.DrawBoard(Colors::Blue);
 	}
 	if (gameIsOver) 
 	{
