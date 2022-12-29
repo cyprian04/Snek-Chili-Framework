@@ -9,8 +9,10 @@ public:
 	Goal(std::mt19937& rng, const Board& in_brd, const Snake& snake);
 	void Respawn(std::mt19937& rng, const Board& brd, const Snake& snake);
 	void Draw(Board& brd) const;
+	void SnakeSpeedIncrease();
 	const Location& GetLocation() const;
-	
+	int Speed = 4;
+	int snekMoveCounter = 0;
 private:
 	static constexpr Color c = Colors::Red;
 	Location loc;

@@ -55,7 +55,6 @@ private:
 	Goal goal;
 	FrameTimer ft;
 	static constexpr int snekMovePeriod = 40;
-	int snekMoveCounter = 0;
 	bool isStarted = false;
 	bool gameIsOver = false;
 	/********************************/

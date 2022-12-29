@@ -26,6 +26,26 @@ void Goal::Draw(Board& brd) const
 	brd.DrawCell(loc, c);
 }
 
+void Goal::SnakeSpeedIncrease()
+{
+	if (Speed < 5)
+	{
+		snekMoveCounter = 0;
+	}
+	else if (Speed > 5 && Speed < 10)
+	{
+		snekMoveCounter = 10;
+	}
+	else if (Speed > 10 && Speed < 15)
+	{
+		snekMoveCounter = 20;
+	}
+	else
+	{
+		snekMoveCounter = 25;
+	}
+}
+
 const Location& Goal::GetLocation() const
 {
 	return loc;

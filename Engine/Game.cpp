@@ -66,10 +66,10 @@ void Game::UpdateModel()
 			delta_loc = { 0,1 };
 		}
 
-		++snekMoveCounter;
-		if (snekMoveCounter >= snekMovePeriod)
+		++goal.snekMoveCounter;
+		if (goal.snekMoveCounter >= snekMovePeriod)
 		{
-			snekMoveCounter = 0;
+			goal.SnakeSpeedIncrease();
 
 			Location next = snek.GetNextHeadLocation(delta_loc);
 			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next))
@@ -82,6 +82,7 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					snek.Grow();
+					++goal.Speed;
 				}
 				snek.MoveBy(delta_loc);
 				if (eating)
