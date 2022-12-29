@@ -28,7 +28,7 @@ void Goal::Draw(Board& brd) const
 
 void Goal::SnakeSpeedIncrease()
 {
-	if (Speed < 5)
+	if (Speed <= 5)
 	{
 		snekMoveCounter = 0;
 	}
@@ -36,7 +36,7 @@ void Goal::SnakeSpeedIncrease()
 	{
 		snekMoveCounter = 10;
 	}
-	else if (Speed > 10 && Speed < 15)
+	else if (Speed >= 10 && Speed < 15)
 	{
 		snekMoveCounter = 20;
 	}
@@ -49,4 +49,26 @@ void Goal::SnakeSpeedIncrease()
 const Location& Goal::GetLocation() const
 {
 	return loc;
+}
+
+int Goal::SetSpeed(int input)
+{
+	Speed += input;
+	return Speed;
+}
+
+int Goal::GetsnekMovePeriod() const
+{
+	return snekMovePeriod;
+}
+
+int Goal::GetsnekMoveCounter()const
+{
+	return snekMoveCounter;
+}
+
+int Goal::SetsnekMoveCounter(int input)
+{
+	snekMoveCounter += input;
+	return snekMoveCounter ;
 }

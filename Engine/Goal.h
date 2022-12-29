@@ -11,9 +11,14 @@ public:
 	void Draw(Board& brd) const;
 	void SnakeSpeedIncrease();
 	const Location& GetLocation() const;
+	int GetsnekMoveCounter() const;
+	int SetsnekMoveCounter(int input);
+	int SetSpeed(int input);
+	int GetsnekMovePeriod() const ;
+private:
 	int Speed = 4;
 	int snekMoveCounter = 0;
-private:
+	static constexpr int snekMovePeriod = 40;
 	static constexpr Color c = Colors::Red;
 	Location loc;
 
