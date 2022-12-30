@@ -44,6 +44,7 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	bool Colliding(const Location& next) const;
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -56,7 +57,7 @@ private:
 	std::mt19937 rng;
 	Goal goal;
 	static constexpr int nObstaclesMax = 50;
-	int nObstacle = 1;
+	int nObstacle = 0;
 	Obstacles obstacle[nObstaclesMax];
 	FrameTimer ft;
 	bool isStarted = false;

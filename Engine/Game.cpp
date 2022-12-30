@@ -72,7 +72,7 @@ void Game::UpdateModel()
 			goal.SnakeSpeedIncrease();
 
 			Location next = snek.GetNextHeadLocation(delta_loc);
-			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next))
+			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || Colliding(next))
 			{
 				gameIsOver = true;
 			}
@@ -88,10 +88,9 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					goal.Respawn(rng, brd, snek);
-
 					spawn = true;
-					rest = nObstacle - 1;
-					nObstacle+=2;
+					rest = nObstacle;
+					++nObstacle;
 					for (int i = rest; i < nObstacle; i++)
 					{
 						obstacle[i].spawnObst(rng, brd, snek );
@@ -126,4 +125,14 @@ void Game::ComposeFrame()
 		SpriteCodex::DrawGameOver(350, 250, gfx);
 	}
 	
+}
+
+bool Game::Colliding(const Location& next) const
+{
+	for (int i = 0; i < nObstacle; i++)
+	{
+		if (obstacle[i].GetLocation() == next)
+		return true;
+	}
+	return false;
 }

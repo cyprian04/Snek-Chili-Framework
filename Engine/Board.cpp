@@ -22,8 +22,8 @@ void Board::DrawCell(const Location& in_loc, Color c)
 
 void Board::DrawBoard(Color c)
 {
-	gfx.DrawRect(left + 5, left, Graphics::ScreenWidth - left, left + 5, c);
-	gfx.DrawRect(left + 5, left, left, Graphics::ScreenHeight - left, c);
+	gfx.DrawRect(left , left, Graphics::ScreenWidth - left, left + 5, c);
+	gfx.DrawRect(left, left, left + 5, Graphics::ScreenHeight - left, c);
 	gfx.DrawRect(left, Graphics::ScreenHeight - left - 5, Graphics::ScreenWidth - left, Graphics::ScreenHeight - left, c);
 	gfx.DrawRect(Graphics::ScreenWidth - left - 5, left, Graphics::ScreenWidth - left, Graphics::ScreenHeight - left, c);
 }
