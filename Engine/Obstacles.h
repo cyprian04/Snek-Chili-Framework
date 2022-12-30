@@ -7,7 +7,7 @@ class Obstacles
 {
 public:
 	void Draw(Board& brd) const;
-	void RespawnObst(std::mt19937& rng, const Board& brd, const Snake& snake);
+	void spawnObst(std::mt19937& rng, const Board& brd, const Snake& snake);
 	const Location& GetLocation();
 
 private:

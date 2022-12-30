@@ -1,7 +1,7 @@
 #pragma once
 #include"Obstacles.h"
 
-void Obstacles::RespawnObst(std::mt19937& rng, const Board& brd, const Snake& snake)
+void Obstacles::spawnObst(std::mt19937& rng, const Board& brd, const Snake& snake)
 {
 	std::uniform_int_distribution<int> xDist(0, brd.GetWidth() - 1);
 	std::uniform_int_distribution<int> yDist(0, brd.GetHeight() - 1);

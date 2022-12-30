@@ -56,13 +56,12 @@ private:
 	std::mt19937 rng;
 	Goal goal;
 	static constexpr int nObstaclesMax = 50;
-	int nObstacle = 2;
+	int nObstacle = 1;
 	Obstacles obstacle[nObstaclesMax];
 	FrameTimer ft;
 	bool isStarted = false;
 	bool gameIsOver = false;
 	bool spawn = false;
-	bool Once = true;
 	int rest;
 	/********************************/
 };

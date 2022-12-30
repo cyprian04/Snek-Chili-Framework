@@ -87,30 +87,14 @@ void Game::UpdateModel()
 				snek.MoveBy(delta_loc);
 				if (eating)
 				{
-					spawn = true;
 					goal.Respawn(rng, brd, snek);
-					if (spawn)
-					{
-						rest = nObstacle;
-						++nObstacle;
 
-						if (Once)
-						{
-							for (int i = 0; i < nObstacle; i++)
-							{
-								obstacle[i].RespawnObst(rng, brd, snek );
-							}
-							Once = false;
-						}
-						else
-						{
-							for (int i = rest; i < nObstacle; i++)
-							{
-								obstacle[i].RespawnObst(rng, brd, snek);
-							}
-							Once = false;
-						}
-						
+					spawn = true;
+					rest = nObstacle - 1;
+					nObstacle+=2;
+					for (int i = rest; i < nObstacle; i++)
+					{
+						obstacle[i].spawnObst(rng, brd, snek );
 					}
 				}
 			}
