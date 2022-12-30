@@ -15,11 +15,13 @@ public:
 	int SetsnekMoveCounter(int input);
 	int SetSpeed(int input);
 	int GetsnekMovePeriod() const ;
+
 private:
 	int Speed = 4;
 	int snekMoveCounter = 0;
 	static constexpr int snekMovePeriod = 40;
 	static constexpr Color c = Colors::Red;
 	Location loc;
+	
 
 };

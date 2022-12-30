@@ -28,7 +28,9 @@
 #include "Snake.h"
 #include "SpriteCodex.h"
 #include "Goal.h"
+#include "Obstacles.h"
 #include "FrameTimer.h"
+
 
 class Game
 {
@@ -53,8 +55,14 @@ private:
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
 	Goal goal;
+	static constexpr int nObstaclesMax = 50;
+	int nObstacle = 2;
+	Obstacles obstacle[nObstaclesMax];
 	FrameTimer ft;
 	bool isStarted = false;
 	bool gameIsOver = false;
+	bool spawn = false;
+	bool Once = true;
+	int rest;
 	/********************************/
 };
