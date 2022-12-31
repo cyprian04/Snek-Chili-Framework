@@ -15,7 +15,7 @@ public:
 	int SetsnekMoveCounter(int input);
 	int SetSpeed(int input);
 	int GetsnekMovePeriod() const ;
-
+	bool yes = false;
 private:
 	int Speed = 4;
 	int snekMoveCounter = 0;

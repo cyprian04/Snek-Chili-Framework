@@ -72,6 +72,7 @@ void Game::UpdateModel()
 			goal.SnakeSpeedIncrease();
 
 			Location next = snek.GetNextHeadLocation(delta_loc);
+			
 			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || Colliding(next))
 			{
 				gameIsOver = true;
@@ -79,6 +80,10 @@ void Game::UpdateModel()
 			else
 			{
 				const bool eating = next == goal.GetLocation();
+				if (PreventCollision()) 
+				{
+					goal.Respawn(rng, brd, snek);
+				}
 				if (eating)
 				{
 					snek.Grow();
@@ -86,7 +91,7 @@ void Game::UpdateModel()
 				}
 				snek.MoveBy(delta_loc);
 				if (eating)
-				{
+				{	
 					goal.Respawn(rng, brd, snek);
 					spawn = true;
 					rest = nObstacle;
@@ -95,6 +100,7 @@ void Game::UpdateModel()
 					{
 						obstacle[i].spawnObst(rng, brd, snek );
 					}
+					
 				}
 			}
 		}
@@ -133,6 +139,18 @@ bool Game::Colliding(const Location& next) const
 	{
 		if (obstacle[i].GetLocation() == next)
 		return true;
+	}
+	return false;
+}
+
+bool Game::PreventCollision()
+{
+	for (int i = 0; i < nObstacle; i++)
+	{
+		Location obst = obstacle[i].GetLocation();
+		if (obst == goal.GetLocation())
+			return true;
+			
 	}
 	return false;
 }

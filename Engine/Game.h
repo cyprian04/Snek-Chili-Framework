@@ -45,6 +45,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	bool Colliding(const Location& next) const;
+	bool PreventCollision();
 	/********************************/
 private:
 	MainWindow& wnd;
