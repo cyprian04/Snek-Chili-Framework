@@ -37,11 +37,11 @@ void Goal::SnakeSpeedIncrease()
 	}
 	else if (Speed >= 10 && Speed < 15)
 	{
-		snekMoveCounter = 10;
+		snekMoveCounter = 15;
 	}
 	else
 	{
-		snekMoveCounter = 10;
+		snekMoveCounter = 20;
 	}
 }
 

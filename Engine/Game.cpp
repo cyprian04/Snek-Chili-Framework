@@ -149,8 +149,7 @@ bool Game::PreventCollision()
 	{
 		Location obst = obstacle[i].GetLocation();
 		if (obst == goal.GetLocation())
-			return true;
-			
+			return true;		
 	}
 	return false;
 }
