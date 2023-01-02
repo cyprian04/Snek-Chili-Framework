@@ -63,8 +63,8 @@ private:
 	FrameTimer ft;
 	float snekMoveCounter = 1.0f;
 	float snekMovePeriod = 40.0f;
-    float snakeMovePeriodMin = 6.0f;
-	float snekMoveFactor = 0.25f;
+    static constexpr float snakeMovePeriodMin = 6.0f;
+	static constexpr float snekMoveFactor = 0.25f;
 	bool isStarted = false;
 	bool gameIsOver = false;
 	bool spawn = false;

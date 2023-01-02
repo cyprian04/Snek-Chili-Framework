@@ -67,7 +67,7 @@ void Game::UpdateModel()
 		}
 
 		float dt = ft.Mark();
-		snekMoveCounter += dt * 60.0f;
+		snekMoveCounter += dt * 60.0f; // dostosowanie pracy countera do 60hz na sekunde //
 		if (snekMoveCounter >= snekMovePeriod)
 		{
 			snekMoveCounter = 0.0f;
