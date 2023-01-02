@@ -67,12 +67,10 @@ void Game::UpdateModel()
 		}
 
 		float dt = ft.Mark();
-		goal.SetsnekMoveCounter( dt * 60.0f);
-
-		if (goal.GetsnekMoveCounter() >= goal.GetsnekMovePeriod())
+		snekMoveCounter += dt * 60.0f;
+		if (snekMoveCounter >= snekMovePeriod)
 		{
-			goal.SnakeSpeedIncrease();
-
+			snekMoveCounter = 0.0f;
 			Location next = snek.GetNextHeadLocation(delta_loc);
 			
 			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || Colliding(next))
@@ -87,7 +85,6 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					snek.Grow();
-					goal.SetSpeed(1.0f);
 				}
 				snek.MoveBy(delta_loc);
 				if (eating)
@@ -103,6 +100,7 @@ void Game::UpdateModel()
 				}
 			}
 		}
+		snekMovePeriod = std::max(snekMovePeriod - dt * snekMoveFactor, snakeMovePeriodMin);
 	}
 }
 

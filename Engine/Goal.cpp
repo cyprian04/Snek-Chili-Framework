@@ -1,6 +1,5 @@
 #pragma once
 #include "Goal.h"
-
 Goal::Goal(std::mt19937& rng, const Board& brd, const Snake& snake)
 {
 	Respawn(rng, brd, snake);
@@ -25,49 +24,8 @@ void Goal::Draw(Board& brd) const
 	brd.DrawCell(loc, c);
 }
 
-void Goal::SnakeSpeedIncrease()
-{
-	if (Speed <= 5.0f)
-	{
-		snekMoveCounter = 0.0f;
-	}
-	else if (Speed > 5.0f && Speed < 10.0f)
-	{
-		snekMoveCounter = 10.0f;
-	}
-	else if (Speed >= 10.0f && Speed < 15.0f)
-	{
-		snekMoveCounter = 15.0f;
-	}
-	else
-	{
-		snekMoveCounter = 20.0f;
-	}
-}
-
 const Location& Goal::GetLocation() const
 {
 	return loc;
 }
 
-float Goal::SetSpeed(float input)
-{
-	Speed += input;
-	return Speed;
-}
-
-float Goal::GetsnekMovePeriod() const
-{
-	return snekMovePeriod;
-}
-
-float Goal::GetsnekMoveCounter()const
-{
-	return snekMoveCounter;
-}
-
-float Goal::SetsnekMoveCounter(float input)
-{
-	snekMoveCounter += input;
-	return snekMoveCounter ;
-}
