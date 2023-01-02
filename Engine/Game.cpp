@@ -66,7 +66,9 @@ void Game::UpdateModel()
 			delta_loc = { 0,1 };
 		}
 
-		goal.SetsnekMoveCounter(1);
+		float dt = ft.Mark();
+		goal.SetsnekMoveCounter( dt * 60.0f);
+
 		if (goal.GetsnekMoveCounter() >= goal.GetsnekMovePeriod())
 		{
 			goal.SnakeSpeedIncrease();
@@ -85,7 +87,7 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					snek.Grow();
-					goal.SetSpeed(1);
+					goal.SetSpeed(1.0f);
 				}
 				snek.MoveBy(delta_loc);
 				if (eating)

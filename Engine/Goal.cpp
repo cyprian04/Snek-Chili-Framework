@@ -27,21 +27,21 @@ void Goal::Draw(Board& brd) const
 
 void Goal::SnakeSpeedIncrease()
 {
-	if (Speed <= 5)
+	if (Speed <= 5.0f)
 	{
-		snekMoveCounter = 0;
+		snekMoveCounter = 0.0f;
 	}
-	else if (Speed > 5 && Speed < 10)
+	else if (Speed > 5.0f && Speed < 10.0f)
 	{
-		snekMoveCounter = 10;
+		snekMoveCounter = 10.0f;
 	}
-	else if (Speed >= 10 && Speed < 15)
+	else if (Speed >= 10.0f && Speed < 15.0f)
 	{
-		snekMoveCounter = 15;
+		snekMoveCounter = 15.0f;
 	}
 	else
 	{
-		snekMoveCounter = 20;
+		snekMoveCounter = 20.0f;
 	}
 }
 
@@ -50,23 +50,23 @@ const Location& Goal::GetLocation() const
 	return loc;
 }
 
-int Goal::SetSpeed(int input)
+float Goal::SetSpeed(float input)
 {
 	Speed += input;
 	return Speed;
 }
 
-int Goal::GetsnekMovePeriod() const
+float Goal::GetsnekMovePeriod() const
 {
 	return snekMovePeriod;
 }
 
-int Goal::GetsnekMoveCounter()const
+float Goal::GetsnekMoveCounter()const
 {
 	return snekMoveCounter;
 }
 
-int Goal::SetsnekMoveCounter(int input)
+float Goal::SetsnekMoveCounter(float input)
 {
 	snekMoveCounter += input;
 	return snekMoveCounter ;
