@@ -80,10 +80,8 @@ void Game::UpdateModel()
 			else
 			{
 				const bool eating = next == goal.GetLocation();
-				if (PreventCollision()) 
-				{
-					goal.Respawn(rng, brd, snek);
-				}
+				PreventCollision();
+				
 				if (eating)
 				{
 					snek.Grow();
@@ -100,7 +98,6 @@ void Game::UpdateModel()
 					{
 						obstacle[i].spawnObst(rng, brd, snek );
 					}
-					
 				}
 			}
 		}
@@ -143,13 +140,12 @@ bool Game::Colliding(const Location& next) const
 	return false;
 }
 
-bool Game::PreventCollision()
+void Game::PreventCollision()
 {
 	for (int i = 0; i < nObstacle; i++)
 	{
 		Location obst = obstacle[i].GetLocation();
 		if (obst == goal.GetLocation())
-			return true;		
+			goal.Respawn(rng, brd, snek);				
 	}
-	return false;
 }
