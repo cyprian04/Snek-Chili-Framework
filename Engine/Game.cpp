@@ -70,7 +70,7 @@ void Game::UpdateModel()
 		snekMoveCounter += dt * 60.0f; // dostosowanie pracy countera do 60hz na sekunde //
 		if (snekMoveCounter >= snekMovePeriod)
 		{
-			snekMoveCounter = 0.0f;
+			snekMoveCounter -= snekMovePeriod;
 			Location next = snek.GetNextHeadLocation(delta_loc);
 			
 			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || Colliding(next))
