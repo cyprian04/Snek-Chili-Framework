@@ -9,7 +9,7 @@ private:
 	{
 	public:
 		void InitHead(const Location& in_loc);	 // okej czaje, proste //
-		void InitBody(bool changeC);			 // okej czaje, proste //
+		void InitBody(Color c_in);			 // okej czaje, proste //
 		void Follow(const Segment& next);		 // okej czaje, nadaje wspó³rzêdne segmentu wczeœniejszego segmnetowi póŸniejszemu, czyli np. na wczeœniejsze miejsce segments[2] wejdzie segments[2] //
 		void MoveBy(const Location& delta_loc);  // okej czaje, sprawdza poprawnoœæ i jeœli wszystko ok to zmienia wartoœci po³o¿enia x i y //
 		void Draw(Board& in_brd) const;
@@ -30,9 +30,7 @@ public:
 	
 private:
 	static constexpr Color headColor = Colors::Magenta;
-	static constexpr Color bodyColor = Colors::Green;
 	static constexpr int nSegmentsMax = 100;
 	Segment segments[nSegmentsMax];
 	int nSegments = 1;
-	bool changeColor = false;
 };
