@@ -77,7 +77,7 @@ bool Board::CheckPoison(const Location& in_loc) const
 void Board::SpawnPoison(std::mt19937& rng, const Snake& snake, const Goal& goal)
 {
 	int a = 0;
-	while(a < width*6)
+	while(a < width*5)
 	{
 		std::uniform_int_distribution<int> xDist(0, width - 1);
 		std::uniform_int_distribution<int> yDist(0, height - 1);
@@ -105,6 +105,11 @@ void Board::DrawPoison()
 			}
 		}
 	}
+}
+
+void Board::PoisonEaten(const Location& in_loc)
+{
+	hasPoison[in_loc.x + in_loc.y * width] = false;
 }
 
 int Board::GetWidth() const

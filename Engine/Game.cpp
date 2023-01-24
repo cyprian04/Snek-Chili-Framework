@@ -80,6 +80,12 @@ void Game::UpdateModel()
 			}
 			else
 			{
+				if (brd.CheckPoison(next))
+				{
+					brd.PoisonEaten(next);
+					snekMovePeriod-=4;
+				}
+
 				const bool eating = next == goal.GetLocation();				
 				if (eating)
 				{

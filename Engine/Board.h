@@ -19,6 +19,7 @@ public:
 	bool CheckPoison(const Location& in_loc) const;
 	void SpawnPoison(std::mt19937& rng, const class Snake& snake, const class Goal& goal);
 	void DrawPoison();
+	void PoisonEaten(const Location& in_loc);
 
 	int GetWidth() const;
 	int GetHeight() const;
