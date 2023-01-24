@@ -73,30 +73,23 @@ void Game::UpdateModel()
 			snekMoveCounter -= snekMovePeriod;
 			Location next = snek.GetNextHeadLocation(delta_loc);
 			
-			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || Colliding(next))
+			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || brd.CheckObstacle(next))
 			{
 				gameIsOver = true;
 			}
 			else
 			{
-				const bool eating = next == goal.GetLocation();
-				PreventCollision();
-				
+				const bool eating = next == goal.GetLocation();				
 				if (eating)
 				{
 					snek.Grow();
 				}
+
 				snek.MoveBy(delta_loc);
 				if (eating)
 				{	
 					goal.Respawn(rng, brd, snek);
-					spawn = true;
-					rest = nObstacle;
-					++nObstacle;
-					for (int i = rest; i < nObstacle; i++)
-					{
-						obstacle[i].spawnObst(rng, brd, snek );
-					}
+					brd.SpawnObstacle(rng, snek, goal);
 				}
 			}
 		}
@@ -114,38 +107,12 @@ void Game::ComposeFrame()
 	{
 		snek.Draw(brd);
 		goal.Draw(brd);
-		if (spawn)
-		{
-			for (int i = 0; i < nObstacle; i++)
-			{
-				obstacle[i].Draw(brd);
-			}
-		}
 		brd.DrawBoard(Colors::Blue);
+		brd.DrawObstacle();
 	}
 	if (gameIsOver) 
 	{	
 		SpriteCodex::DrawGameOver(350, 250, gfx);
 	}
 	
-}
-
-bool Game::Colliding(const Location& next) const
-{
-	for (int i = 0; i < nObstacle; i++)
-	{
-		if (obstacle[i].GetLocation() == next)
-		return true;
-	}
-	return false;
-}
-
-void Game::PreventCollision()
-{
-	for (int i = 0; i < nObstacle; i++)
-	{
-		Location obst = obstacle[i].GetLocation();
-		if (obst == goal.GetLocation())
-			goal.Respawn(rng, brd, snek);				
-	}
 }

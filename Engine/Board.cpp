@@ -1,5 +1,7 @@
 #pragma once
 #include "Board.h"
+#include "Snake.h"
+#include "Goal.h"
 
 Board::Board(Graphics& gfx)
 	: 
@@ -32,6 +34,41 @@ bool Board::IsInsideBoard(const Location& in_loc) const
 	return in_loc.x >= 0 && in_loc.x < width &&
 		   in_loc.y >= 0 && in_loc.y < height ;
 }
+
+bool Board::CheckObstacle(const Location& in_loc) const
+{
+	return hasObstacle[in_loc.x + in_loc.y * width ];
+}
+
+void Board::SpawnObstacle(std::mt19937& rng, const Snake& snake, const Goal& goal)
+{
+	std::uniform_int_distribution<int> xDist(0, width - 1);
+	std::uniform_int_distribution<int> yDist(0, height - 1);
+
+	Location newLoc;
+	do
+	{
+		newLoc.x = xDist(rng);
+		newLoc.y = yDist(rng);
+	} while (CheckObstacle(newLoc) || snake.IsInTile(newLoc) || goal.GetLocation() == newLoc);
+
+	hasObstacle[newLoc.x + newLoc.y * width] = true;
+}
+
+void Board::DrawObstacle()
+{
+	for (int y = 0; y < height ; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			if (CheckObstacle({x,y}))
+			{
+				DrawCell({x,y}, Colors::Gray);
+			}
+		}
+	}
+}
+
 
 int Board::GetWidth() const
 {

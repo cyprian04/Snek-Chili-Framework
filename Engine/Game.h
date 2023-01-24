@@ -28,7 +28,6 @@
 #include "Snake.h"
 #include "SpriteCodex.h"
 #include "Goal.h"
-#include "Obstacles.h"
 #include "FrameTimer.h"
 
 
@@ -44,8 +43,6 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	bool Colliding(const Location& next) const;
-	void PreventCollision();
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -57,9 +54,6 @@ private:
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
 	Goal goal;
-	static constexpr int nObstaclesMax = 50;
-	int nObstacle = 0;
-	Obstacles obstacle[nObstaclesMax];
 	FrameTimer ft;
 	float snekMoveCounter = 1.0f;
 	float snekMovePeriod = 40.0f;
