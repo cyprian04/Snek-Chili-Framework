@@ -30,6 +30,7 @@ Game::Game( MainWindow& wnd )
 	rng(std::random_device()()), // krótszy zapis aby nie robiæ deklaracji w Game.h //
 	goal(rng, brd, snek)
 {
+	brd.SpawnPoison(rng, snek, goal);
 }
 
 void Game::Go()
@@ -86,6 +87,7 @@ void Game::UpdateModel()
 				}
 
 				snek.MoveBy(delta_loc);
+
 				if (eating)
 				{	
 					goal.Respawn(rng, brd, snek);
@@ -109,6 +111,7 @@ void Game::ComposeFrame()
 		goal.Draw(brd);
 		brd.DrawBoard(Colors::Blue);
 		brd.DrawObstacle();
+		brd.DrawPoison();
 	}
 	if (gameIsOver) 
 	{	

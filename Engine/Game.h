@@ -61,7 +61,5 @@ private:
 	static constexpr float snekMoveFactor = 0.25f;
 	bool isStarted = false;
 	bool gameIsOver = false;
-	bool spawn = false;
-	int rest;
 	/********************************/
 };
