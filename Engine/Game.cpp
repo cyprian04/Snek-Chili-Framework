@@ -85,19 +85,19 @@ void Game::UpdateModel()
 				{
 					brd.PoisonEaten(next);
 					snekMovePeriod-=4;
-				}
+				}				
 
-				const bool eating =  brd.CheckGoal(next);
-				if (eating)
+				  
+				if (brd.CheckGoal(next))
 				{
 					snek.Grow();
 				}
 
 				snek.MoveBy(delta_loc);
 
-				if (eating)
+				if (brd.CheckGoal(next))
 				{	
-					//goal.Respawn(rng, brd, snek);
+					brd.RespawnGoal(next, rng, snek);
 					brd.SpawnObstacle(rng, snek);
 				}
 			}
@@ -115,7 +115,6 @@ void Game::ComposeFrame()
 	if (isStarted )
 	{
 		snek.Draw(brd);
-		//goal.Draw(brd);
 		brd.DrawBoard(Colors::Blue);
 		brd.DrawObstacle();
 		brd.DrawPoison();

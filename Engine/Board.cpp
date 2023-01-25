@@ -151,6 +151,22 @@ void Board::DrawGoal()
 	}
 }
 
+void Board::RespawnGoal(const Location& in_loc, std::mt19937& rng, const Snake& snake)
+{
+	hasGoal[in_loc.x + in_loc.y * width] = false;
+
+	std::uniform_int_distribution<int> xDist(0, width - 1);
+	std::uniform_int_distribution<int> yDist(0, height - 1);
+
+	Location newLoc;
+	do
+	{
+		newLoc.x = xDist(rng);
+		newLoc.y = yDist(rng);
+	} while (CheckPoison(newLoc) || snake.IsInTile(newLoc) || CheckGoal(newLoc) || CheckObstacle(newLoc));
+	hasGoal[newLoc.x + newLoc.y * width] = true;
+}
+
 int Board::GetWidth() const
 {
 	return width;

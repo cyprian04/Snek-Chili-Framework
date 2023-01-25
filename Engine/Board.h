@@ -24,7 +24,7 @@ public:
 	bool CheckGoal(const Location& in_loc) const;
 	void SpawnGoal(std::mt19937& rng, const class Snake& snake);
 	void DrawGoal();
-	void GoalEaten(const Location& in_loc);
+	void RespawnGoal(const Location& in_loc, std::mt19937& rng, const Snake& snake);
 
 	int GetWidth() const;
 	int GetHeight() const;
