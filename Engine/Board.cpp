@@ -1,7 +1,6 @@
 #pragma once
 #include "Board.h"
 #include "Snake.h"
-//#include "Goal.h"
 
 Board::Board(Graphics& gfx)
 	: 
