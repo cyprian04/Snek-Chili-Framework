@@ -70,10 +70,16 @@ void Game::UpdateModel()
 			delta_loc = { 0,1 };
 		}
 
-		snekMoveCounter += dt * 60.0f; // dostosowanie pracy countera do 60hz na sekunde //
-		if (snekMoveCounter >= snekMovePeriod)
+		float snekModifiedSpeed = snekMovePeriod;
+		if (wnd.kbd.KeyIsPressed(VK_CONTROL))
 		{
-			snekMoveCounter -= snekMovePeriod;
+			snekModifiedSpeed = std::min(snekMovePeriod, snakeMovePeriodSpeedUp);
+		}
+
+		snekMoveCounter += dt * 60.0f; // dostosowanie pracy countera do 60hz na sekunde //
+		if (snekMoveCounter >= snekModifiedSpeed)
+		{
+			snekMoveCounter -= snekModifiedSpeed;
 			Location next = snek.GetNextHeadLocation(delta_loc);
 			
 			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || brd.CheckObstacle(next))
@@ -87,8 +93,7 @@ void Game::UpdateModel()
 					brd.PoisonEaten(next);
 					snekMovePeriod-=4;
 				}				
-
-				  
+  
 				if (brd.CheckGoal(next))
 				{
 					snek.Grow();
