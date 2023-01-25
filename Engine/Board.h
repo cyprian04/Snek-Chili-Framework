@@ -29,7 +29,7 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 private:
-	static constexpr int left = 100;		// jest to punkt dla wyznaczanie miejsca pêtli for do rysowania(mo¿e byæ do x i do y)
+	static constexpr int left = 150;		// jest to punkt dla wyznaczanie miejsca pêtli for do rysowania(mo¿e byæ do x i do y)
 	static constexpr int def = 90;
 	static constexpr int dimension = 20 ;
 	static constexpr int width = 30 -2*(left - def)/ dimension;

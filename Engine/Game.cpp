@@ -44,6 +44,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = ft.Mark();
+
 	if (wnd.kbd.KeyIsPressed(VK_RETURN))
 	{
 		isStarted = true;
@@ -68,7 +70,6 @@ void Game::UpdateModel()
 			delta_loc = { 0,1 };
 		}
 
-		float dt = ft.Mark();
 		snekMoveCounter += dt * 60.0f; // dostosowanie pracy countera do 60hz na sekunde //
 		if (snekMoveCounter >= snekMovePeriod)
 		{
