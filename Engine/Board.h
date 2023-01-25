@@ -13,13 +13,18 @@ public:
 	bool IsInsideBoard(const Location& in_loc) const;
 
 	bool CheckObstacle(const Location& in_loc) const;
-	void SpawnObstacle( std::mt19937& rng, const class Snake& snake, const class Goal& goal);
+	void SpawnObstacle( std::mt19937& rng, const class Snake& snake);
 	void DrawObstacle();
 
 	bool CheckPoison(const Location& in_loc) const;
-	void SpawnPoison(std::mt19937& rng, const class Snake& snake, const class Goal& goal);
+	void SpawnPoison(std::mt19937& rng, const class Snake& snake);
 	void DrawPoison();
 	void PoisonEaten(const Location& in_loc);
+
+	bool CheckGoal(const Location& in_loc) const;
+	void SpawnGoal(std::mt19937& rng, const class Snake& snake);
+	void DrawGoal();
+	void GoalEaten(const Location& in_loc);
 
 	int GetWidth() const;
 	int GetHeight() const;
@@ -31,6 +36,7 @@ private:
 	static constexpr int height = 20 - 2 * (left - def) / dimension;
 	bool hasObstacle[width * height] = { false }; 
 	bool hasPoison[width * height] = { false };
+	bool hasGoal[width * height] = { false };
 	Graphics& gfx; /* stworzy³em obiekt typu referencji z klasy Graphcis(tak to przypadek ¿e nazwa³em go gfx)
 				    aby nie musieæ dawaæ referencji z parametrem w deklaracjach funkcj tej klasy np. void DrawCell*/ 
 };

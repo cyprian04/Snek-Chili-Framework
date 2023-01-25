@@ -7,16 +7,21 @@ Goal::Goal(std::mt19937& rng, const Board& brd, const Snake& snake)
 
 void Goal::Respawn(std::mt19937& rng, const Board& brd, const Snake& snake)
 {
-	std::uniform_int_distribution<int> xDist(0, brd.GetWidth() - 1);
-	std::uniform_int_distribution<int> yDist(0, brd.GetHeight() - 1);
-	Location newLoc;
-	do
+	int a = 0;
+	while (a < 5)
 	{
-		newLoc.x = xDist(rng);
-		newLoc.y = yDist(rng);
-	} while (snake.IsInTile(newLoc) || brd.CheckPoison(newLoc));
-
-	loc = newLoc;
+		std::uniform_int_distribution<int> xDist(0, brd.GetWidth() - 1);
+		std::uniform_int_distribution<int> yDist(0, brd.GetHeight() - 1);
+		Location newLoc;
+		do
+		{
+			newLoc.x = xDist(rng);
+			newLoc.y = yDist(rng);
+		} while (snake.IsInTile(newLoc) || brd.CheckPoison(newLoc));
+	
+		loc = newLoc;
+		a++;
+	}
 }
 
 void Goal::Draw(Board& brd) const

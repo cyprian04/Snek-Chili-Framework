@@ -27,10 +27,11 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	brd(gfx),
 	snek({2,2}),
-	rng(std::random_device()()), // krótszy zapis aby nie robiæ deklaracji w Game.h //
-	goal(rng, brd, snek)
+	rng(std::random_device()()) // krótszy zapis aby nie robiæ deklaracji w Game.h //
+	
 {
-	brd.SpawnPoison(rng, snek, goal);
+	brd.SpawnPoison(rng, snek);
+	brd.SpawnGoal(rng, snek);
 }
 
 void Game::Go()
@@ -86,7 +87,7 @@ void Game::UpdateModel()
 					snekMovePeriod-=4;
 				}
 
-				const bool eating = next == goal.GetLocation();				
+				const bool eating =  brd.CheckGoal(next);
 				if (eating)
 				{
 					snek.Grow();
@@ -96,8 +97,8 @@ void Game::UpdateModel()
 
 				if (eating)
 				{	
-					goal.Respawn(rng, brd, snek);
-					brd.SpawnObstacle(rng, snek, goal);
+					//goal.Respawn(rng, brd, snek);
+					brd.SpawnObstacle(rng, snek);
 				}
 			}
 		}
@@ -114,10 +115,11 @@ void Game::ComposeFrame()
 	if (isStarted )
 	{
 		snek.Draw(brd);
-		goal.Draw(brd);
+		//goal.Draw(brd);
 		brd.DrawBoard(Colors::Blue);
 		brd.DrawObstacle();
 		brd.DrawPoison();
+		brd.DrawGoal();
 	}
 	if (gameIsOver) 
 	{	

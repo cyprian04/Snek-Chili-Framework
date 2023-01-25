@@ -27,7 +27,7 @@
 #include <random>
 #include "Snake.h"
 #include "SpriteCodex.h"
-#include "Goal.h"
+//#include "Goal.h"
 #include "FrameTimer.h"
 
 
@@ -53,7 +53,7 @@ private:
 	Snake snek;
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
-	Goal goal;
+	//Goal goal;
 	FrameTimer ft;
 	float snekMoveCounter = 1.0f;
 	float snekMovePeriod = 40.0f;
