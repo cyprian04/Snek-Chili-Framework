@@ -59,7 +59,7 @@ private:
 	float snekMovePeriod = 40.0f;
     static constexpr float snakeMovePeriodMin = 6.0f;
 	static constexpr float snakeMovePeriodSpeedUp = 15.0f;
-	static constexpr float snekMoveFactor = 0.25f;
+	static constexpr float snekMoveFactor = 0.85f;
 	bool isStarted = false;
 	bool gameIsOver = false;
 	/********************************/
