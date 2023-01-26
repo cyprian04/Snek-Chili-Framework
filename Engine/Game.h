@@ -53,6 +53,8 @@ private:
 	Location delta_loc = {1,0};
 	std::mt19937 rng;
 	FrameTimer ft;
+	static constexpr int nPoison = 250;
+	static constexpr int nGoal = 10;
 	float snekMoveCounter = 1.0f;
 	float snekMovePeriod = 40.0f;
     static constexpr float snakeMovePeriodMin = 6.0f;

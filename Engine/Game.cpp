@@ -30,8 +30,15 @@ Game::Game( MainWindow& wnd )
 	rng(std::random_device()()) // krótszy zapis aby nie robiæ deklaracji w Game.h //
 	
 {
-	brd.SpawnPoison(rng, snek);
-	brd.SpawnGoal(rng, snek);
+	for (int i = 0; i <nPoison ; i++)
+	{
+		brd.SpawnContent(rng, snek, 3);
+	}
+
+	for (int i = 0; i < nGoal; i++)
+	{
+		brd.SpawnContent(rng, snek, 2);
+	}
 }
 
 void Game::Go()
@@ -81,32 +88,32 @@ void Game::UpdateModel()
 		{
 			snekMoveCounter -= snekModifiedSpeed;
 			Location next = snek.GetNextHeadLocation(delta_loc);
-			
-			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || brd.CheckObstacle(next))
+			const int content = brd.GetContent(next);
+
+			if (!brd.IsInsideBoard(next) || snek.IsInTileExceptEnd(next) || content == 1)
 			{
 				gameIsOver = true;
 			}
 
-			else
+			else if (content == 2)
 			{
-				if (brd.CheckPoison(next))
-				{
-					brd.PoisonEaten(next);
-					snekMovePeriod-=4;
-				}				
-  
-				if (brd.CheckGoal(next))
-				{
-					snek.Grow();
-				}
-
+				snek.Grow();
 				snek.MoveBy(delta_loc);
-
-				if (brd.CheckGoal(next))
-				{	
-					brd.RespawnGoal(next, rng, snek);
-					brd.SpawnObstacle(rng, snek);
-				}
+				brd.ConsumeContent(next);
+				brd.SpawnContent(rng, snek, 1);
+				brd.SpawnContent(rng, snek, 2);
+			}
+			
+			else if (content == 3)
+			{
+				snek.MoveBy(delta_loc);
+				brd.ConsumeContent(next);
+				snekMovePeriod-=4.0f;
+			}				
+  
+			else 
+			{
+				snek.MoveBy(delta_loc);
 			}
 		}
 		snekMovePeriod = std::max(snekMovePeriod - dt * snekMoveFactor, snakeMovePeriodMin);
@@ -123,9 +130,7 @@ void Game::ComposeFrame()
 	{
 		snek.Draw(brd);
 		brd.DrawBoard(Colors::Blue);
-		brd.DrawObstacle();
-		brd.DrawPoison();
-		brd.DrawGoal();
+		brd.DrawContent();
 	}
 	if (gameIsOver) 
 	{	
