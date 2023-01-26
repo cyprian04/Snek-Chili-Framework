@@ -86,6 +86,7 @@ void Game::UpdateModel()
 			{
 				gameIsOver = true;
 			}
+
 			else
 			{
 				if (brd.CheckPoison(next))
